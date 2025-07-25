@@ -226,7 +226,12 @@ class AccessibilityAnalyzer extends BaseAnalyzer implements Analyzer
         $criticalElementsWithoutAriaLabels = [];
         $criticalElements = ['input', 'select', 'textarea'];
         foreach ($criticalElements as $elementName) {
-            $elements = @$xpath->query("//{$elementName}");
+            // Exclude hidden input fields from accessibility checks as per W3C standards
+            if ($elementName === 'input') {
+                $elements = @$xpath->query("//input[not(@type='hidden')]");
+            } else {
+                $elements = @$xpath->query("//{$elementName}");
+            }
 
             foreach ($elements ?: [] as $element) {
                 /* @var $element DOMElement */
