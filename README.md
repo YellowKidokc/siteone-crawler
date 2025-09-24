@@ -34,6 +34,7 @@ GIF animation of the crawler in action (also available as a [▶️ video](https
 - [▶️ Usage](#️-usage)
     * [Basic example](#basic-example)
     * [Fully-featured example](#fully-featured-example)
+    * [Simple local GUI](#simple-local-gui)
     * [Arguments](#️-arguments)
         + [Basic settings](#basic-settings)
         + [Output settings](#output-settings)
@@ -299,6 +300,23 @@ required arguments:
   --mail-smtp-user=smtp.user \
   --mail-smtp-pass=secretPassword123
 ```
+
+### Simple local GUI
+
+Prefer buttons over the command line? Start the built-in GUI and let it compose the correct arguments for you:
+
+```bash
+./bin/gui-server
+```
+
+Then open <http://127.0.0.1:8000> in your browser. The GUI lets you:
+
+* Crawl an entire site starting from a single URL **or** run a curated list of individual pages (each fetched as a single page).
+* Enable Markdown export with sensible defaults and optional tweaks such as combining everything into one file, excluding menus/footers, or skipping images/files.
+* Append any advanced CLI options you already know – just drop them in one-per-line and they will be added to every run.
+* Download the generated Markdown files directly from the browser. All exports are saved inside `tmp/gui-exports/` so you can inspect or archive them later.
+
+The GUI runs the same `./crawler` binary under the hood, so anything that works on the CLI will work here too.
 
 ## ⚙️ Arguments
 

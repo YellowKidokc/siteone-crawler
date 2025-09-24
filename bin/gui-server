@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+DOCROOT="${PROJECT_ROOT}/gui"
+PORT="8000"
+HOST="127.0.0.1"
+
+if ! command -v php >/dev/null 2>&1; then
+  echo "Error: PHP is required to run the GUI server." >&2
+  exit 1
+fi
+
+if [ ! -d "$DOCROOT" ]; then
+  echo "Error: GUI directory not found at $DOCROOT" >&2
+  exit 1
+fi
+
+cd "$PROJECT_ROOT"
+
+printf '\nStarting SiteOne Crawler GUI at http://%s:%s\nPress Ctrl+C to stop.\n\n' "$HOST" "$PORT"
+exec php -S "$HOST:$PORT" -t "$DOCROOT"
